@@ -52,4 +52,12 @@ M.elixir = {
   }
 }
 
+M.java_lsp = {
+  n = {
+    ["<leader>cf"] = { "<cmd>lua vim.lsp.buf.formatting()<CR>", "Format Java code" },
+    ["<leader>ca"] = { "<cmd>lua vim.lsp.buf.code_action()<CR>", "Code Actions" },
+    ["<leader>rr"] = { "<cmd>JdtCompile<CR>", "Run Java Code" },
+  }
+}
+
 return M

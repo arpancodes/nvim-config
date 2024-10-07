@@ -24,10 +24,18 @@ local plugins = {
     end
   },
   {
+    "mfussenegger/nvim-jdtls", -- Java LSP support
+    ft = "java",  -- Load this plugin only for Java files
+    config = function ()
+      require("custom.configs.jdtls").setup()
+    end
+  },
+  {
     "williamboman/mason.nvim",
     opts = {
       ensure_installed = {
-        "gopls",
+        "jdtls",
+        "google-java-format",
         "gopls",
         "clangd",
         "rust-analyzer",
