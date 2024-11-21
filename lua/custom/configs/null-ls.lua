@@ -7,7 +7,7 @@ local opts = {
     null_ls.builtins.formatting.gofmt,
     null_ls.builtins.formatting.goimports_reviser,
     null_ls.builtins.formatting.mix,
-
+    null_ls.builtins.formatting.prettierd,
   },
   on_attach = function(client, bufnr)
     if client.supports_method("textDocument/formatting") then

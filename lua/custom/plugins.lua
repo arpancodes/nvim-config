@@ -2,11 +2,26 @@ local cmp = require "cmp"
 
 local plugins = {
   {
-    "jose-elias-alvarez/null-ls.nvim",
+    "nvimtools/none-ls.nvim",
     event="VeryLazy",
     opts = function()
       return require "custom.configs.null-ls"
     end
+  },
+  {
+    'numToStr/Comment.nvim',
+    config = function ()
+      require('Comment').setup {
+        pre_hook = function()
+          return vim.bo.commentstring
+        end
+      }
+    end,
+    lazy = false,
+    dependencies = {
+      "JoosepAlviste/nvim-ts-context-commentstring",
+      'nvim-treesitter/nvim-treesitter',
+    }
   },
   {
     "vim-crystal/vim-crystal",
@@ -33,6 +48,10 @@ local plugins = {
         "rust-analyzer",
         "clang-format",
         "elixir-ls",
+        "typescript-language-server",
+        "eslint-lsp",
+        "prettierd",
+        "tailwindcss-language-server",
       }
     }
   },
@@ -69,6 +88,9 @@ local plugins = {
     "mfussenegger/nvim-dap",
     init = function()
       require("core.utils").load_mappings("dap")
+    end,
+    config = function ()
+      require "custom.configs.dap"
     end
   },
   {
@@ -78,6 +100,25 @@ local plugins = {
     config = function (_, opts)
       require("dap-go").setup(opts)
       require("core.utils").load_mappings("dap_go")
+    end
+  },
+  {
+    "rcarriga/nvim-dap-ui",
+    event = "VeryLazy",
+    dependencies = { "nvim-neotest/nvim-nio", "mfussenegger/nvim-dap"},
+    config = function()
+      local dap = require("dap")
+      local dapui = require("dapui")
+      require("dapui").setup()
+      dap.listeners.after.event_initialized["dapui_config"] = function()
+        dapui.open()
+      end
+      dap.listeners.before.event_terminated["dapui_config"] = function()
+        dapui.close()
+      end
+      dap.listeners.before.event_exited["dapui_config"] = function()
+        dapui.close()
+      end
     end
   },
   {
@@ -121,6 +162,27 @@ local plugins = {
       }
       table.insert(M.sources, {name = "crates"})
       return M
+    end,
+  },
+  {
+    "windwp/nvim-ts-autotag",
+    ft = {"javascript", "javascriptreact", "typescript", "typescriptreact", "html"},
+    config = function()
+      require("nvim-ts-autotag").setup()
+    end,
+  },
+  {
+    "nvim-treesitter/nvim-treesitter",
+    opts = function()
+      local opts = require "plugins.configs.treesitter"
+      opts.ensure_installed = {
+        "lua",
+        "javascript",
+        "typescript",
+        "tsx",
+        "html",
+      }
+      return opts
     end,
   },
   {

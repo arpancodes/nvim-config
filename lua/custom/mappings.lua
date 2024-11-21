@@ -11,6 +11,10 @@ M.dap = {
         sidebar.open();
       end,
       "Open debugging sidebar"
+    },
+    ["<leader>dr"] = {
+      "<cmd> DapContinue <CR>",
+      "Run or continue the debugger"
     }
   }
 }
@@ -51,5 +55,7 @@ M.elixir = {
     ["<leader>cf"] = { "<cmd> MixFormat <CR>", "Format Elixir code" }
   }
 }
+
+vim.keymap.set('i', 'jk', '<ESC>')
 
 return M
