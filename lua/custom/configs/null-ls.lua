@@ -8,6 +8,9 @@ local opts = {
     null_ls.builtins.formatting.goimports_reviser,
     null_ls.builtins.formatting.mix,
     null_ls.builtins.formatting.prettierd,
+    null_ls.builtins.formatting.google_java_format.with({
+      extra_args = { "--aosp" },  -- Use Android Open Source Project style if preferred
+    }),
   },
   on_attach = function(client, bufnr)
     if client.supports_method("textDocument/formatting") then
