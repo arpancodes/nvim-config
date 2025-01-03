@@ -60,6 +60,7 @@ lspconfig.tsserver.setup {
   init_options = {
     preferences = {
       disableSuggestions = true,
+      importModuleSpecifierPreference = "non-relative",
     }
   },
   commands = {
@@ -70,7 +71,7 @@ lspconfig.tsserver.setup {
   }
 }
 
-local servers = {"tailwindcss", "eslint"}
+local servers = {"tailwindcss", "eslint",}
 
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {

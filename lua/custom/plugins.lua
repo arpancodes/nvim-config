@@ -64,6 +64,7 @@ local plugins = {
         "eslint-lsp",
         "prettierd",
         "tailwindcss-language-server",
+
       }
     }
   },
@@ -196,6 +197,10 @@ local plugins = {
       }
       return opts
     end,
+  },
+  {
+        "jxnblk/vim-mdx-js",
+        ft = { "mdx" },
   },
   {
     "kylechui/nvim-surround",
